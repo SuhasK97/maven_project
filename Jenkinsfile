@@ -28,37 +28,29 @@ pipeline {
         // -------------------- BUILD --------------------
         stage('Build') {
             steps {
-                sh '''
-                    cd maven
-                    mvn clean compile
-                '''
+                sh 'mvn clean compile'
             }
         }
 
         // -------------------- LINT (CHECKSTYLE) --------------------
         stage('Lint') {
             steps {
-                sh '''
-                    cd maven
-                    mvn checkstyle:check
-                '''
+                sh 'mvn checkstyle:check'
             }
         }
 
         // -------------------- UNIT TESTS --------------------
         stage('Unit Tests') {
             steps {
-                sh '''
-                    cd maven
-                    mvn test
-                '''
+                sh 'mvn test'
             }
             post {
                 always {
                     junit allowEmptyResults: true,
-                          testResults: 'maven/target/surefire-reports/*.xml'
+                          testResults: 'target/surefire-reports/*.xml'
                 }
             }
         }
     }
 }
+
