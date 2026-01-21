@@ -1,12 +1,12 @@
 pipeline {
-    agent { label 'linuxgit' }
+    agent { label 'git_Pipeline' }
 
     options {
         timestamps()
     }
 
     environment {
-        GIT_REPO   = 'https://gitlab.com/sandeep160/pipeline-e2e.git'
+        GIT_REPO   = 'git@github.com:SuhasK97/maven_project.git'
         BRANCH     = 'main'
 
         MAVEN_HOME = tool 'Maven3'
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 git branch: BRANCH,
                     url: GIT_REPO,
-                    credentialsId: '246e4390-6513-40d3-9379-a13be88e6658'
+                    credentialsId: 'git_pipeline'
             }
         }
 
